@@ -58,7 +58,7 @@ fadeEls.forEach(el => observer.observe(el));
 
 // === BOOKING FORM — powered by Formspree ===
 // SETUP: Replace YOUR_FORMSPREE_ID below with your actual ID from formspree.io
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORMSPREE_ID';
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mzdorkgn';
 
 async function handleSubmit(e) {
   e.preventDefault();

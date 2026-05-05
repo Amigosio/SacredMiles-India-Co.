@@ -56,30 +56,47 @@ const observer = new IntersectionObserver((entries) => {
 
 fadeEls.forEach(el => observer.observe(el));
 
-// === BOOKING FORM ===
-function handleSubmit(e) {
+// === BOOKING FORM — powered by Formspree ===
+// SETUP: Replace YOUR_FORMSPREE_ID below with your actual ID from formspree.io
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORMSPREE_ID';
+
+async function handleSubmit(e) {
   e.preventDefault();
   const form    = document.getElementById('bookingForm');
   const success = document.getElementById('formSuccess');
+  const error   = document.getElementById('formError');
   const btn     = form.querySelector('button[type="submit"]');
 
-  // Animate button
   btn.textContent = '✦ Sending...';
   btn.disabled = true;
+  if (error) error.style.display = 'none';
 
-  // Simulate async submission (replace with actual fetch/email API)
-  setTimeout(() => {
-    form.style.display   = 'none';
-    success.style.display = 'block';
-    success.style.animation = 'fadeUp 0.6s ease both';
-  }, 1200);
+  try {
+    const data = Object.fromEntries(new FormData(form));
 
-  // In production, use EmailJS or Formspree:
-  // fetch('https://formspree.io/f/YOUR_ID', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify(Object.fromEntries(new FormData(form)))
-  // }).then(() => { ... });
+    const res = await fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+
+    if (res.ok) {
+      form.style.display    = 'none';
+      success.style.display = 'block';
+    } else {
+      throw new Error('Submission failed');
+    }
+  } catch (err) {
+    btn.textContent = '🙏 Send My Enquiry';
+    btn.disabled = false;
+    if (error) {
+      error.style.display = 'block';
+      error.textContent = 'Something went wrong. Please call us directly on +91 7387160790.';
+    }
+  }
 }
 
 // === SMOOTH ACTIVE NAV HIGHLIGHT ===

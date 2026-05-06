@@ -1015,25 +1015,6 @@ section:nth-child(even) { background: rgba(245,237,208,0.5); }
   color: rgba(255,255,255,0.35);
 }
 
-/* === ELFSIGHT CHATBOT === */
-/* Elfsight manages its own fixed positioning internally.
-   We only ensure it sits above our WhatsApp button z-index. */
-.elfsight-chatbot-wrap {
-  z-index: 950;
-}
-
-/* Push WhatsApp button up so it doesn't overlap the chatbot launcher */
-.whatsapp-float {
-  bottom: 6rem;
-}
-
-@media (max-width: 768px) {
-  .whatsapp-float {
-    bottom: 5.5rem;
-    right: 1rem;
-  }
-}
-
 /* === WHATSAPP FLOAT === */
 .whatsapp-float {
   position: fixed;

@@ -1015,6 +1015,31 @@ section:nth-child(even) { background: rgba(245,237,208,0.5); }
   color: rgba(255,255,255,0.35);
 }
 
+/* === ELFSIGHT CHATBOT === */
+.elfsight-chatbot-wrap {
+  position: fixed;
+  bottom: 6rem;
+  right: 2rem;
+  z-index: 950;
+  filter: drop-shadow(0 4px 24px rgba(139,26,26,0.22));
+}
+
+/* Push WhatsApp up so it doesn't overlap chatbot */
+.whatsapp-float {
+  bottom: 10.5rem;
+}
+
+@media (max-width: 768px) {
+  .elfsight-chatbot-wrap {
+    bottom: 5rem;
+    right: 1rem;
+  }
+  .whatsapp-float {
+    bottom: 9.5rem;
+    right: 1rem;
+  }
+}
+
 /* === WHATSAPP FLOAT === */
 .whatsapp-float {
   position: fixed;

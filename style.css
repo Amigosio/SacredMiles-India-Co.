@@ -263,34 +263,65 @@ section:nth-child(even) { background: rgba(245,237,208,0.5); }
 }
 
 /* === HERO VIDEO BACKGROUND === */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  /* Fallback image shown on mobile / while video loads */
+  background: url('https://images.unsplash.com/photo-1561359313-0639aad49ca6?w=1920&q=90') center/cover no-repeat;
+}
+
 .hero-video-wrap {
   position: absolute;
   inset: 0;
   overflow: hidden;
   z-index: 0;
   background: var(--dark);
+  /* Slightly enlarge to hide any Google Drive border artifact */
+  margin: -4px;
 }
+
+/* Scale iframe to always fill the viewport — cover behaviour */
 .hero-video-wrap iframe {
   position: absolute;
   top: 50%;
   left: 50%;
-  /* Maintain 16:9 and always cover the container */
+  /* 16:9 cover — always fills container */
   width: 177.78vh;
-  height: 100vh;
+  height: 56.25vw;
   min-width: 100%;
-  min-height: 56.25vw;
+  min-height: 100%;
   transform: translate(-50%, -50%);
   border: none;
   pointer-events: none;
-  opacity: 0.85;
+  opacity: 0.9;
 }
-/* Ensure overlay and content sit above video */
-#hero .hero-overlay,
-#hero .hero-pattern { z-index: 1; }
-#hero .hero-content,
-#hero .hero-scroll   { z-index: 2; }
 
-/* === INDIA INTERACTIVE MAP === */
+/* Blocks Google Drive's top toolbar and bottom control bar */
+.video-ui-block {
+  position: absolute;
+  left: 0; right: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: var(--dark);
+}
+.video-ui-top    { top: 0;     height: 52px; }
+.video-ui-bottom { bottom: 0;  height: 60px; }
+
+/* Overlay and pattern sit above video but below content */
+#hero .hero-overlay,
+#hero .hero-pattern { z-index: 2; }
+#hero .hero-content,
+#hero .hero-scroll   { z-index: 3; }
+
+/* Hide video on mobile — use fallback image instead for performance */
+@media (max-width: 768px) {
+  .hero-video-wrap { display: none; }
+}
 #map {
   background: linear-gradient(135deg, var(--dark) 0%, #2a0800 50%, var(--dark) 100%);
   padding: 7rem 0;
@@ -509,19 +540,6 @@ section:nth-child(even) { background: rgba(245,237,208,0.5); }
 }
 @media (max-width: 480px) {
   .india-svg { max-width: 300px; }
-}
-
-/* === HERO VIDEO BACKGROUND === */
-#hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  padding: 0;
-  /* Fallback colour shown before video loads */
-  background: var(--dark);
 }
 
 .hero-overlay {

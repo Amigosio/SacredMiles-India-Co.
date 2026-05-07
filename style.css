@@ -262,7 +262,256 @@ section:nth-child(even) { background: rgba(245,237,208,0.5); }
   transition: all var(--transition);
 }
 
-/* === HERO === */
+/* === HERO VIDEO BACKGROUND === */
+.hero-video-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  background: var(--dark);
+}
+.hero-video-wrap iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* Maintain 16:9 and always cover the container */
+  width: 177.78vh;
+  height: 100vh;
+  min-width: 100%;
+  min-height: 56.25vw;
+  transform: translate(-50%, -50%);
+  border: none;
+  pointer-events: none;
+  opacity: 0.85;
+}
+/* Ensure overlay and content sit above video */
+#hero .hero-overlay,
+#hero .hero-pattern { z-index: 1; }
+#hero .hero-content,
+#hero .hero-scroll   { z-index: 2; }
+
+/* === INDIA INTERACTIVE MAP === */
+#map {
+  background: linear-gradient(135deg, var(--dark) 0%, #2a0800 50%, var(--dark) 100%);
+  padding: 7rem 0;
+  position: relative;
+  overflow: hidden;
+}
+#map::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ccircle cx='40' cy='40' r='35' fill='none' stroke='%23C9A84C' stroke-width='0.4' opacity='0.08'/%3E%3C/svg%3E");
+  background-size: 80px 80px;
+}
+#map .section-tag  { color: var(--gold); background: rgba(201,168,76,0.1); border-color: rgba(201,168,76,0.25); }
+#map .section-heading { color: #fff; }
+#map .section-desc { color: rgba(255,255,255,0.55); }
+#map .section-header::after { color: rgba(201,168,76,0.3); }
+
+.map-wrap {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 4rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* SVG Container */
+.map-svg-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.india-svg {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  filter: drop-shadow(0 0 40px rgba(201,168,76,0.15));
+}
+
+/* India land shapes */
+.india-land {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  opacity: 0.7;
+}
+.india-fill {
+  fill: url(#mapGrad);
+  stroke: none;
+}
+
+/* Markers */
+.map-marker {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.map-marker:focus { outline: none; }
+
+.pulse-ring {
+  fill: none;
+  stroke: var(--saffron);
+  stroke-width: 1.5;
+  opacity: 0;
+  animation: mapPulse 2.5s ease-out infinite;
+}
+.pulse-ring.delay1 {
+  animation-delay: 1.25s;
+}
+
+.marker-bg {
+  fill: var(--saffron);
+  stroke: var(--gold);
+  stroke-width: 1.5;
+  transition: all 0.3s ease;
+  filter: url(#markerGlow);
+}
+
+.marker-emoji {
+  font-size: 9px;
+  fill: #fff;
+}
+
+.marker-label {
+  font-family: var(--font-head);
+  font-size: 8px;
+  font-weight: 700;
+  fill: rgba(255,255,255,0.7);
+  letter-spacing: 0.05em;
+  pointer-events: none;
+}
+
+/* Active / hover state */
+.map-marker:hover .marker-bg,
+.map-marker.active .marker-bg {
+  fill: var(--gold);
+  stroke: #fff;
+  stroke-width: 2;
+  r: 13;
+  filter: url(#activeGlow);
+}
+.map-marker:hover .marker-label,
+.map-marker.active .marker-label {
+  fill: var(--gold-light);
+  font-size: 9px;
+}
+.map-marker.active .pulse-ring {
+  stroke: var(--gold);
+  animation: mapPulse 1.5s ease-out infinite;
+}
+
+@keyframes mapPulse {
+  0%   { opacity: 0.8; r: 10; }
+  100% { opacity: 0;   r: 26; }
+}
+
+/* Info Panel */
+.map-panel {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 6px;
+  padding: 2.5rem 2rem;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.map-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--saffron), var(--gold), var(--maroon));
+}
+
+.map-panel-default {
+  text-align: center;
+  color: rgba(255,255,255,0.4);
+}
+.map-panel-om {
+  font-family: var(--font-deva);
+  font-size: 4rem;
+  color: rgba(201,168,76,0.25);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+.map-panel-default p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+/* Detail panel */
+.map-panel-detail { width: 100%; animation: fadeUp 0.4s ease both; }
+
+.mpd-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+.mpd-state {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.25);
+  padding: 0.25em 0.8em;
+  border-radius: 2px;
+  margin-bottom: 0.75rem;
+}
+.mpd-name {
+  font-family: var(--font-head);
+  font-size: 1.6rem;
+  color: #fff;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+.mpd-desc {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
+}
+.mpd-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+}
+.mpd-tags span {
+  background: rgba(212,114,42,0.15);
+  color: var(--saffron);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.2em 0.7em;
+  border-radius: 2px;
+  border: 1px solid rgba(212,114,42,0.3);
+}
+
+/* Map responsive */
+@media (max-width: 900px) {
+  .map-wrap {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .map-svg-container { order: 1; }
+  .map-panel { order: 2; min-height: 260px; }
+  .india-svg { max-width: 360px; }
+}
+@media (max-width: 480px) {
+  .india-svg { max-width: 300px; }
+}
+
+/* === HERO VIDEO BACKGROUND === */
 #hero {
   position: relative;
   min-height: 100vh;
@@ -271,8 +520,8 @@ section:nth-child(even) { background: rgba(245,237,208,0.5); }
   justify-content: center;
   overflow: hidden;
   padding: 0;
-  background:
-    url('https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=1920&q=90') center/cover no-repeat;
+  /* Fallback colour shown before video loads */
+  background: var(--dark);
 }
 
 .hero-overlay {

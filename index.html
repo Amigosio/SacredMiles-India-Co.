@@ -39,6 +39,7 @@
       </button>
       <ul class="nav-links" id="navLinks">
         <li><a href="#places">Destinations</a></li>
+        <li><a href="#map">Map</a></li>
         <li><a href="#itinerary">Itineraries</a></li>
         <li><a href="#events">Events</a></li>
         <li><a href="#booking" class="nav-cta">Book Now</a></li>
@@ -48,6 +49,16 @@
 
   <!-- ============ HERO ============ -->
   <section id="hero">
+    <!-- Video Background — swap the YouTube ID below to change the video -->
+    <div class="hero-video-wrap">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/9s5HQvMjbUQ?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playsinline=1&modestbranding=1&playlist=9s5HQvMjbUQ"
+        frameborder="0"
+        allow="autoplay; encrypted-media; fullscreen"
+        allowfullscreen
+        title="Sacred India Background Video">
+      </iframe>
+    </div>
     <div class="hero-overlay"></div>
     <div class="hero-pattern"></div>
     <div class="hero-content">
@@ -235,6 +246,168 @@
             <h3>Mahakaleshwar Jyotirlinga</h3>
             <p>One of the twelve sacred Jyotirlingas, the Mahakaleshwar temple in Ujjain is unique as the only Dakshina-mukhi Shivalinga — witness the mystical Bhasma Aarti at dawn.</p>
             <div class="place-tags"><span>Shiva</span><span>Jyotirlinga</span><span>Bhasma Aarti</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INDIA MAP ============ -->
+  <section id="map">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-tag">Sacred Geography</span>
+        <h2 class="section-heading">Explore <em>on the Map</em></h2>
+        <p class="section-desc">Click any glowing marker to discover sacred destinations across the land of dharma.</p>
+      </div>
+
+      <div class="map-wrap fade-in">
+
+        <!-- SVG India Map -->
+        <div class="map-svg-container">
+          <svg viewBox="0 0 460 540" xmlns="http://www.w3.org/2000/svg" class="india-svg" aria-label="Interactive Map of India">
+            <defs>
+              <radialGradient id="mapGrad" cx="50%" cy="50%" r="50%">
+                <stop offset="0%"   stop-color="#C9A84C" stop-opacity="0.18"/>
+                <stop offset="100%" stop-color="#8B1A1A" stop-opacity="0.08"/>
+              </radialGradient>
+              <filter id="markerGlow">
+                <feGaussianBlur stdDeviation="3" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <filter id="activeGlow">
+                <feGaussianBlur stdDeviation="5" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+
+            <!-- India Outline -->
+            <path class="india-land" d="
+              M 110,65
+              L 130,42 L 155,24 L 185,16 L 218,20
+              L 252,28 L 295,42 L 332,58 L 370,72
+              L 408,90 L 442,118 L 454,152
+              L 446,182 L 424,202 L 398,218
+              L 372,236 L 348,255 L 326,275
+              L 308,300 L 290,325 L 272,350
+              L 254,375 L 238,400 L 220,425
+              L 204,448 L 188,468 L 172,485
+              L 158,500 L 148,512 L 140,520
+              L 130,510 L 116,492 L 102,470
+              L 90,448 L 80,424 L 72,400
+              L 66,374 L 62,348 L 59,320
+              L 56,294 L 50,268 L 40,250
+              L 24,240 L 32,225 L 46,210
+              L 58,195 L 64,178 L 62,160
+              L 66,142 L 74,124 L 82,106
+              L 90,88 L 98,72 L 110,65 Z"
+            />
+
+            <!-- India fill -->
+            <path class="india-fill" d="
+              M 110,65
+              L 130,42 L 155,24 L 185,16 L 218,20
+              L 252,28 L 295,42 L 332,58 L 370,72
+              L 408,90 L 442,118 L 454,152
+              L 446,182 L 424,202 L 398,218
+              L 372,236 L 348,255 L 326,275
+              L 308,300 L 290,325 L 272,350
+              L 254,375 L 238,400 L 220,425
+              L 204,448 L 188,468 L 172,485
+              L 158,500 L 148,512 L 140,520
+              L 130,510 L 116,492 L 102,470
+              L 90,448 L 80,424 L 72,400
+              L 66,374 L 62,348 L 59,320
+              L 56,294 L 50,268 L 40,250
+              L 24,240 L 32,225 L 46,210
+              L 58,195 L 64,178 L 62,160
+              L 66,142 L 74,124 L 82,106
+              L 90,88 L 98,72 L 110,65 Z"
+            />
+
+            <!-- ── Destination Markers ── -->
+
+            <!-- Varanasi -->
+            <g class="map-marker" data-id="varanasi" transform="translate(229,228)" tabindex="0" role="button" aria-label="Varanasi">
+              <circle class="pulse-ring" r="18"/><circle class="pulse-ring delay1" r="18"/>
+              <circle class="marker-bg" r="10"/>
+              <text class="marker-emoji" text-anchor="middle" dominant-baseline="central" dy="1">🕉</text>
+              <text class="marker-label" text-anchor="middle" dy="22">Varanasi</text>
+            </g>
+
+            <!-- Golden Temple -->
+            <g class="map-marker" data-id="amritsar" transform="translate(104,115)" tabindex="0" role="button" aria-label="Amritsar">
+              <circle class="pulse-ring" r="18"/><circle class="pulse-ring delay1" r="18"/>
+              <circle class="marker-bg" r="10"/>
+              <text class="marker-emoji" text-anchor="middle" dominant-baseline="central" dy="1">⭐</text>
+              <text class="marker-label" text-anchor="middle" dy="22">Amritsar</text>
+            </g>
+
+            <!-- Kedarnath -->
+            <g class="map-marker" data-id="kedarnath" transform="translate(170,131)" tabindex="0" role="button" aria-label="Kedarnath">
+              <circle class="pulse-ring" r="18"/><circle class="pulse-ring delay1" r="18"/>
+              <circle class="marker-bg" r="10"/>
+              <text class="marker-emoji" text-anchor="middle" dominant-baseline="central" dy="1">🏔</text>
+              <text class="marker-label" text-anchor="middle" dy="22">Kedarnath</text>
+            </g>
+
+            <!-- Mathura / Vrindavan -->
+            <g class="map-marker" data-id="vrindavan" transform="translate(185,195)" tabindex="0" role="button" aria-label="Vrindavan">
+              <circle class="pulse-ring" r="18"/><circle class="pulse-ring delay1" r="18"/>
+              <circle class="marker-bg" r="10"/>
+              <text class="marker-emoji" text-anchor="middle" dominant-baseline="central" dy="1">🪷</text>
+              <text class="marker-label" text-anchor="middle" dy="22">Vrindavan</text>
+            </g>
+
+            <!-- Ujjain -->
+            <g class="map-marker" data-id="ujjain" transform="translate(125,268)" tabindex="0" role="button" aria-label="Ujjain">
+              <circle class="pulse-ring" r="18"/><circle class="pulse-ring delay1" r="18"/>
+              <circle class="marker-bg" r="10"/>
+              <text class="marker-emoji" text-anchor="middle" dominant-baseline="central" dy="1">🔱</text>
+              <text class="marker-label" text-anchor="middle" dy="22">Ujjain</text>
+            </g>
+
+            <!-- Udaipur / Nathdwara -->
+            <g class="map-marker" data-id="udaipur" transform="translate(90,245)" tabindex="0" role="button" aria-label="Udaipur">
+              <circle class="pulse-ring" r="18"/><circle class="pulse-ring delay1" r="18"/>
+              <circle class="marker-bg" r="10"/>
+              <text class="marker-emoji" text-anchor="middle" dominant-baseline="central" dy="1">🏰</text>
+              <text class="marker-label" text-anchor="middle" dy="22">Udaipur</text>
+            </g>
+
+            <!-- Tirupati -->
+            <g class="map-marker" data-id="tirupati" transform="translate(210,410)" tabindex="0" role="button" aria-label="Tirupati">
+              <circle class="pulse-ring" r="18"/><circle class="pulse-ring delay1" r="18"/>
+              <circle class="marker-bg" r="10"/>
+              <text class="marker-emoji" text-anchor="middle" dominant-baseline="central" dy="1">🛕</text>
+              <text class="marker-label" text-anchor="middle" dy="22">Tirupati</text>
+            </g>
+
+            <!-- Rameshwaram -->
+            <g class="map-marker" data-id="rameshwaram" transform="translate(196,490)" tabindex="0" role="button" aria-label="Rameshwaram">
+              <circle class="pulse-ring" r="18"/><circle class="pulse-ring delay1" r="18"/>
+              <circle class="marker-bg" r="10"/>
+              <text class="marker-emoji" text-anchor="middle" dominant-baseline="central" dy="1">🌊</text>
+              <text class="marker-label" text-anchor="middle" dy="22">Rameshwaram</text>
+            </g>
+
+          </svg>
+        </div>
+
+        <!-- Info Panel -->
+        <div class="map-panel" id="mapPanel">
+          <div class="map-panel-default" id="mapDefault">
+            <div class="map-panel-om">ॐ</div>
+            <p>Tap a glowing marker on the map to explore the sacred destination</p>
+          </div>
+          <div class="map-panel-detail" id="mapDetail" style="display:none">
+            <div class="mpd-icon" id="mpdIcon"></div>
+            <span class="mpd-state" id="mpdState"></span>
+            <h3 class="mpd-name" id="mpdName"></h3>
+            <p class="mpd-desc" id="mpdDesc"></p>
+            <div class="mpd-tags" id="mpdTags"></div>
+            <a href="#places" class="btn-primary btn-sm mpd-btn">View Full Details</a>
           </div>
         </div>
 
@@ -578,7 +751,7 @@
               <div>
                 <strong>Jhanvi Chepyala</strong>
                 <span>Queries & Information</span>
-                <a href="mailto:sacredmilesindia@amigosscrolls.online">✉ Write to Jhanvi</a>
+                <a href="mailto:sacredmilesindia@gmail.com">✉ Write to Jhanvi</a>
               </div>
             </div>
           </div>
